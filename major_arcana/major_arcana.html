@@ -1,0 +1,219 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>Let's Learn Tarot!</title>
+	<link href="https://fonts.google.com/specimen/Grandstander" rel="stylesheet">
+	<link href="../styles/format.css" rel="stylesheet" type="text/css">
+
+
+
+</head>
+
+<body>
+	<header>
+		<div class="topnav" id="myTopnav">
+  			<a href="../home.html" class="active">Home</a>
+  			<a href="major_arcana.html">Major Arcana</a>
+  			<div class="dropdown">
+    		<button class="dropbtn">Minor Arcana
+      		<i class="fa fa-caret-down"></i>
+    		</button>
+    	<div class="dropdown-content">
+      		<a href="../minor_arcana/cup.html">Cups</a>
+      		<a href="../minor_arcana/swords.html">Swords</a>
+      		<a href="../minor_arcana/wands.html">Wands</a>
+      		<a href="../minor_arcana/pentacles.html">Pentacles</a>
+    	</div>
+  		<div>
+  		<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+		</div>
+	</header>
+
+	<h1 style="color: #01FDF6;">Tarot Flashcards: Major Arcana</h1>
+
+	<div class="flip-container" id="flashcard">
+		<div class="flipper">
+			<div class="front">
+				<span id="flashcard-content-front">1</span>
+				<div><img src="" style="max-width:80%; max-height: 300px; left:25%; top:75%;" id="card-image"></div>
+			</div>
+			<div class="back">
+				<span id="flashcard-content-back">2</span>
+			</div>
+		</div>
+	</div>
+
+	<div id="buttons">
+			<button id='prev'>Previous</button>
+			<button id='flip'>Flip</button>
+			<button id='next'>Next</button>
+	</div>
+
+
+
+<script>
+	var flashcard = document.getElementById('flashcard');
+	var prev = document.querySelector('#prev');
+	var flip = document.querySelector('#flip');
+	var next = document.querySelector('#next');
+
+		var questions=[
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?"
+
+		];
+
+		var images=[
+			"https://www.tarot-explained.com/wp-content/uploads/2015/01/RWS_Tarot_00_Fool.jpg",
+			"https://www.usgamesinc.com/images/product/WR78_magician.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards/tarot-highpriestess.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards/tarot-empress.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards/tarot-emperor.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards/tarot-hierophant.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards/tarot-lovers.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards/tarot-chariot.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards/tarot-strength.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards/tarot-hermit.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards/tarot-wheeloffortune.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-justice.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-hangedman.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-death.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-temperance.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-devil.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-tower.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-star.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-moon.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-sun.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-judgement.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-world.jpg"
+
+		];
+
+		var answers=[
+			"<b>Upright:</b> beginnings, innocence, spontaneity, a free spirit <br> <b>Reversed:</b> naivety, foolishness, recklessness, risk-taking",
+			"<b>Upright:</b> power, skill, concentration, action, resourcefulness <br> <b>Reversed:</b> manipulation, poor planning, latent talents",
+			"<b>Upright:</b> intuition, higher powers, mystery, subconscious mind <br> <b>Reversed:</b> hidden agendas, need to listen to inner voice",
+			"<b>Upright:</b> fertility, femininity, beauty, nature, abundance <br> <b>Reversed:</b> creative block, dependence on others",
+			"<b>Upright:</b> authority, father-figure, structure, solid foundation <br> <b>Reversed:</b> domination, excessive control, rigidity, inflexibility",
+			"<b>Upright:</b> religion, group identification, conformity, tradition, beliefs <br> <b>Reversed:</b> restriction, challenging the status quo",
+			"<b>Upright:</b> love, union, relationships, values alignment, choices <br> <b>Reversed:</b> disharmony, imbalance, misalignment of values",
+			"<b>Upright:</b> control, will power, victory, assertion, determination <br> <b>Reversed:</b> lack of control and direction, aggression",
+			"<b>Upright:</b> inner strength, bravery, compassion, focus <br> <b>Reversed:</b> self doubt, weakness, insecurity",
+			"<b>Upright:</b> contemplation, search for truth, inner guidance <br> <b>Reversed:</b> loneliness, isolation, lost your way",
+			"<b>Upright:</b> change, cycles, inevitable fate <br> <b>Reversed:</b> no control, clinging to control, bad luck",
+			"<b>Upright:</b> cause and effect, clarity, truth <br> <b>Reversed:</b> dishonesty, unaccountability, unfairness",
+			"<b>Upright:</b> sacrifice, release, martyrdom <br> <b>Reversed:</b> stalling, needless sacrifice, fear of sacrifice",
+			"<b>Upright:</b> end of cycle, beginnings, change, metamorphosis <br> <b>Reversed:</b> fear of change, holding on, stagnation, decay",
+			"<b>Upright:</b> middle path, patience, finding meaning <br> <b>Reversed:</b> extremes, excess, lack of balance",
+			"<b>Upright:</b> addiction, materialism, playfulness <br> <b>Reversed:</b> freedom, release, restoring control",
+			"<b>Upright:</b> sudden upheaval, broken pride, disaster <br> <b>Reversed:</b> disaster avoided, delayed disaster, fear of suffering",
+			"<b>Upright:</b> hope, faith, rejuvenation <br> <b>Reversed:</b> faithlessness, discouragement, insecurity",
+			"<b>Upright:</b> unconscious, illusions, intuition <br> <b>Reversed:</b> confusion, fear, misinterpretation",
+			"<b>Upright:</b> joy, success, celebration, positivity <br> <b>Reversed:</b> negativity, depression, sadness",
+			"<b>Upright:</b> reflection, reckoning, awakening <br> <b>Reversed:</b> lack of self awareness, doubt, self loathing",
+			"<b>Upright:</b> fulfillment, harmony, completion <br> <b>Reversed:</b> incompletion, no closure"
+		];
+
+		var currentText = questions[0];
+		var questionNumber = 0;
+		var cardState = 0;
+		/*!-- 0 indicates the front question side and 1 indicates the back answer side*/
+
+		updateFront();
+		updateBack();
+
+		function flipCard()
+		{
+			if(cardState==0){
+				currentText = answers[questionNumber];
+				cardState++;
+				updateBack();
+			}
+			else{
+				currentText = questions[questionNumber];
+				cardState--;
+				updateFront();
+			}
+		}
+
+		function nextCard()
+		{
+			var length = questions.length;
+
+			if(questionNumber<length-1)
+				questionNumber++;
+			else
+				questionNumber=0;
+
+			if(cardState==0){
+				currentText = questions[questionNumber];
+				updateFront();
+			}
+			else{
+				flipCard();
+				flashcard.classList.toggle('flipped');
+				updateText();
+			}
+
+		}
+
+		function previousCard()
+		{
+			var length = questions.length;
+			if(questionNumber>0)
+				questionNumber--;
+			else
+				questionNumber=length-1;
+
+			if(cardState==0){
+				currentText = questions[questionNumber];
+				updateFront();
+			}
+			else{
+				flipCard();
+				flashcard.classList.toggle('flipped');
+				updateText();
+			}
+		}
+
+		/*Updates the text shown on the flashcard after a button press.*/
+		function updateFront(){
+			document.getElementById("flashcard-content-front").innerHTML = currentText;
+			document.getElementById("card-image").src = images[questionNumber];
+		}
+		function updateBack(){
+			document.getElementById("flashcard-content-back").innerHTML = currentText;
+		}
+
+		flip.addEventListener('click', flipCard);
+		prev.addEventListener('click', previousCard);
+		next.addEventListener('click', nextCard);
+
+		flip.addEventListener('click', function() {
+			flashcard.classList.toggle('flipped');
+			updateText();
+		}, false);
+
+		</script>
+	</body>
+</html>
