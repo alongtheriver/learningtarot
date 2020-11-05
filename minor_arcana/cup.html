@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Let's Learn Tarot!</title>
+	<link href="../styles/format.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.google.com/specimen/Grandstander" rel="stylesheet">
+
+
+
+
+</head>
+
+<body>
+
+	<header>
+		<div class="topnav" id="myTopnav">
+  			<a href="../home.html" class="active">Home</a>
+  			<a href="/major_arcana/major_arcana.html">Major Arcana</a>
+  			<div class="dropdown">
+    		<button class="dropbtn">Minor Arcana
+      		<i class="fa fa-caret-down"></i>
+    		</button>
+    	<div class="dropdown-content">
+      		<a href="cup.html">Cups</a>
+      		<a href="swords.html">Swords</a>
+      		<a href="wands.html">Wands</a>
+      		<a href="pentacles.html">Pentacles</a>
+    	</div>
+  		<div>
+  		<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+		</div>
+	</header>
+
+	<h1 style="color: #01FDF6;">Tarot Flashcards: Minor Arcana Cups</h1>
+
+	<div class="flip-container" id="flashcard">
+		<div class="flipper">
+			<div class="front">
+				<span id="flashcard-content-front">1</span>
+				<div><img src="" style="max-width:80%; max-height: 300px; left:25%; top:75%;" id="card-image"></div>
+			</div>
+			<div class="back">
+				<span id="flashcard-content-back">2</span>
+			</div>
+		</div>
+	</div>
+
+	<div id="buttons">
+			<button id='prev'>Previous</button>
+			<button id='flip'>Flip</button>
+			<button id='next'>Next</button>
+	</div>
+
+<script>
+	var flashcard = document.getElementById('flashcard');
+	var prev = document.querySelector('#prev');
+	var flip = document.querySelector('#flip');
+	var next = document.querySelector('#next');
+
+		var questions=[
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?",
+			"What is the meaning?"
+
+		];
+
+		var images=[
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-01.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-02.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-03.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-04.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-05.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-06.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-07.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-08.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-09.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-10.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-11.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-12.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-13.jpg",
+			"https://www.tarotcardmeanings.net/images/tarotcards-large/tarot-cups-14.jpg"
+
+		];
+
+		var answers=[
+			"<b>Upright:</b> new feelings, spirituality, intuition <br> <b>Reversed:</b> emotional loss, blocked creativity, emptiness",
+			"<b>Upright:</b> unity, partnership, connection <br> <b>Reversed:</b> imbalance, broken communication, tension",
+			"<b>Upright:</b> friendship, community, happiness <br> <b>Reversed:</b> overindulgence, gossip, isolation",
+			"<b>Upright:</b> apathy, contemplation, disconnectedness <br> <b>Reversed:</b> sudden awareness, choosing happiness, acceptance",
+			"<b>Upright:</b> loss, grief, self-pity <br> <b>Reversed:</b> acceptance, moving on, finding peace",
+			"<b>Upright:</b> familiarity, happy memories, healing <br> <b>Reversed:</b> moving forward, leaving home, independence",
+			"<b>Upright:</b> searching for purpose, choices, daydreaming <br> <b>Reversed:</b> lack of purpose, diversion, confusion",
+			"<b>Upright:</b> walking away, disillusionment, leaving behind <br> <b>Reversed:</b> avoidance, fear of change, fear of loss",
+			"<b>Upright:</b> satisfaction, emotional stability, luxury <br> <b>Reversed:</b> lack of inner joy, smugness, dissatisfaction",
+			"<b>Upright:</b> inner happiness, fulfillment, dreams coming true <br> <b>Reversed:</b> shattered dreams, broken family, domestic disharmony",
+			"<b>Upright:</b> happy surprise, dreamer, sensitivity <br> <b>Reversed:</b> emotional immaturity, insecurity, disappointment",
+			"<b>Upright:</b> following the heart, idealist, romantic <br> <b>Reversed:</b> moodiness, disappointment",
+			"<b>Upright:</b> compassion, calm, comfort <br> <b>Reversed:</b> martyrdom, insecurity, dependence",
+			"<b>Upright:</b> compassion, control, balance <br> <b>Reversed:</b> coldness, moodiness, bad advice"
+
+			];
+
+		var currentText = questions[0];
+		var questionNumber = 0;
+		var cardState = 0;
+		/*!-- 0 indicates the front question side and 1 indicates the back answer side*/
+
+		updateFront();
+		updateBack();
+
+		function flipCard()
+		{
+			if(cardState==0){
+				currentText = answers[questionNumber];
+				cardState++;
+				updateBack();
+			}
+			else{
+				currentText = questions[questionNumber];
+				cardState--;
+				updateFront();
+			}
+		}
+
+		function nextCard()
+		{
+			var length = questions.length;
+
+			if(questionNumber<length-1)
+				questionNumber++;
+			else
+				questionNumber=0;
+
+			if(cardState==0){
+				currentText = questions[questionNumber];
+				updateFront();
+			}
+			else{
+				flipCard();
+				flashcard.classList.toggle('flipped');
+				updateText();
+			}
+
+		}
+
+		function previousCard()
+		{
+			var length = questions.length;
+			if(questionNumber>0)
+				questionNumber--;
+			else
+				questionNumber=length-1;
+
+			if(cardState==0){
+				currentText = questions[questionNumber];
+				updateFront();
+			}
+			else{
+				flipCard();
+				flashcard.classList.toggle('flipped');
+				updateText();
+			}
+		}
+
+		/*Updates the text shown on the flashcard after a button press.*/
+		function updateFront(){
+			document.getElementById("flashcard-content-front").innerHTML = currentText;
+			document.getElementById("card-image").src = images[questionNumber];
+		}
+		function updateBack(){
+			document.getElementById("flashcard-content-back").innerHTML = currentText;
+		}
+
+		flip.addEventListener('click', flipCard);
+		prev.addEventListener('click', previousCard);
+		next.addEventListener('click', nextCard);
+
+		flip.addEventListener('click', function() {
+			flashcard.classList.toggle('flipped');
+			updateText();
+		}, false);
+
+		</script>
+	</body>
+</html>
